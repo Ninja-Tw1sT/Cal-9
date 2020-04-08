@@ -1,0 +1,599 @@
+<span md-colors="{color:'primary'}">
+    <mat-card-title class="header">
+        <h1>Add Your Certifications</h1>
+    </mat-card-title>
+    <mat-card-content>
+
+    </mat-card-content>
+</span>
+
+<form #signUpForm="ngForm" class="center" (ngSubmit)="signUpForm.valid && onSubmit(signUpForm)">
+  <div class="center1" fxLayout="column" fxLayoutGap="32px">
+    <input type="text" #issuerName="ngModel" [(ngModel)]="userService.selectedUser.certifications.issuerName" name="issuerName" placeholder="Issuer Name"
+    required  [ngClass]="{'invalid-textbox' :signUpForm.submitted && !issuerName.valid }">
+    <div *ngIf="signUpForm.submitted && !issuerName.valid">
+      <label style="color: #fff;" class="validation-message">This field is required.</label>
+    </div>
+  </div>
+  <div class="center1" fxLayout="column" fxLayoutGap="32px">
+    <input type="text" #certification="ngModel" [(ngModel)]="userService.selectedUser.certifications.certification" name="certification" placeholder="certification"
+    required [ngClass]="{'invalid-textbox' :signUpForm.submitted && !certification.valid }">
+    <div *ngIf="signUpForm.submitted && certification.invalid">
+      <label style="color: #fff;" class="validation-message">This field is required.</label>
+    </div>
+  </div>
+  <div class="center1" fxLayout="column" fxLayoutGap="32px">
+    <input type="text" #certificationID="ngModel" [(ngModel)]="userService.selectedUser.certifications.certificationID" name="certificationID" placeholder="certificationID"
+    required [ngClass]="{'invalid-textbox' :signUpForm.submitted && !certificationID.valid }">
+    <div *ngIf="signUpForm.submitted && certificationID.invalid">
+      <label style="color: #fff;" class="validation-message">This field is required.</label>
+    </div><br>
+  </div>
+  <div class="center1" fxLayout="column" fxLayoutGap="32px">
+    <input type="submit" value="Add" class="center">
+  </div>
+</form>
+
+<!-- Success message -->
+<div class="success" *ngIf="showSucessMessage">
+  Saved successfully
+</div>
+
+<!-- Error message -->
+<div class="alert" *ngIf="serverErrorMessages">
+  {{serverErrorMessages}}
+</div>
+
+
+
+
+<!--
+<body>
+  <mat-accordion>
+      <mat-expansion-panel>
+          <body>
+              <div class="row">
+                <div class="col s12">
+                  <div class="card">
+                    <div class="card-content white-text">
+                      <div class="row">
+                        <div class="col s5">
+                          <form #employeeForm="ngForm" (ngSubmit)="onSubmit(employeeForm)">
+                            <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="employeeService.selectedEmployee._id">
+                            <div class="row">
+                              <div class="input-field col s12">
+                                <label>Issuer Name :
+                                  <label class="red-text">*</label>
+                                </label>
+                                <input type="text" name="issuerName" #name="ngModel" [(ngModel)]="employeeService.selectedEmployee.issuername" placeholder="Enter issuer name" required>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="input-field col s12">
+                                  <label>Certification :</label>
+                                <input type="text" name="certification" #name="ngModel" [(ngModel)]="employeeService.selectedEmployee.certification" placeholder="Certification">
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="input-field col s12">
+                                <button class="btn btn-custom right" type="button" (click)="resetForm(employeeForm)">Reset</button>
+                                <button class="btn btn-custom right" type="submit" [disabled]="!employeeForm.valid">Submit</button>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                        <div class="col s7">
+                            <table class="responsive-table highlight">
+                                <thead>
+                                  <tr>
+                                    <th>Issuer Name</th>
+                              .navbar {
+  color: rgb(255, 145, 0);
+  background-color: #02309c;
+  justify-content: space-between;
+}
+
+span {
+  padding-right: 1rem;
+}
+
+body {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.mat-expansion-panel-header-description {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.mat-expansion-panel {
+  text-align: center;
+  background-color: #fff;
+}
+
+
+.mat-card-title {
+  color: orange;
+  text-align: center;
+}
+.mat-button, .mat-stroked-button {
+  background-color:#0c2152;
+  color: #fff;
+}
+
+.mat-button-toggle-group {
+  background-color: blue;
+  color: blue;
+}
+/*
+.mat-panel-title {
+  justify-content: center !important;
+}
+
+.headers-align .mat-expansion-panel-header-title,
+.headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+*/
+
+
+.form {
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  background: rgb(206, 83, 12);
+  padding: 30px;
+  width: 90%;
+  max-width: 450px;
+  position: relative;
+  padding: 0px;
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+.container {
+  background-color: coral;
+}
+      <th>Certification</th>
+                                    <th></th>
+                                  </tr>
+                                </thead>
+                                <tr *ngFor="let emp of employeeService.employees">
+                                  <td>{{emp.name}}</td>
+                                  <td>{{emp.position}}</td>
+                                  <td>
+                                      <a class="action-btn" (click)="onEdit(emp)">
+                                        <i class="material-icons">edit</i>
+                                      </a>
+                                      .navbar {
+  color: rgb(255, 145, 0);
+  background-color: #02309c;
+  justify-content: space-between;
+}
+
+span {
+  padding-right: 1rem;
+}
+
+body {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.mat-expansion-panel-header-description {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.mat-expansion-panel {
+  text-align: center;
+  background-color: #fff;
+}
+
+
+.mat-card-title {
+  color: orange;
+  text-align: center;
+}
+.mat-button, .mat-stroked-button {
+  background-color:#0c2152;
+  color: #fff;
+}
+
+.mat-button-toggle-group {
+  background-color: blue;
+  color: blue;
+}
+/*
+.mat-panel-title {
+  justify-content: center !important;
+}
+
+.headers-align .mat-expansion-panel-header-title,
+.headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+*/
+
+
+.form {
+  -webkit-border-radius: 10px 10px 10p.navbar {
+  color: rgb(255, 145, 0);
+  background-color: #02309c;
+  justify-content: space-between;
+}
+
+span {
+  padding-right: 1rem;
+}
+
+body {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.mat-expansion-panel-header-description {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.mat-expansion-panel {
+  text-align: center;
+  background-color: #fff;
+}
+
+
+.mat-card-title {
+  color: orange;
+  text-align: center;
+}
+.mat-button, .mat-stroked-button {
+  background-color:#0c2152;
+  color: #fff;
+}
+
+.mat-button-toggle-group {
+  background-color: blue;
+  color: blue;
+}
+/*
+.mat-panel-title {
+  justify-content: center !important;
+}
+
+.headers-align .mat-expansion-panel-header-title,
+.headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.headers-align .mat-expansion-panel-header-description {
+  .navbar {
+  color: rgb(255, 145, 0);
+  background-color: #02309c;
+  justify-content: space-between;
+}
+
+span {
+  padding-right: 1rem;
+}
+
+body {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.mat-expansion-panel-header-description {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.mat-expansion-panel {
+  text-align: center;
+  background-color: #fff;
+}
+
+
+.mat-card-title {
+  color: orange;
+  text-align: center;
+}
+.mat-button, .mat-stroked-button {
+  background-color:#0c2152;
+  color: #fff;
+}
+
+.mat-button-toggle-group {
+  background-color: blue;
+  color: blue;
+}
+/*
+.mat-panel-title {
+  justify-content: center !important;
+}
+
+.headers-align .mat-expansion-panel-header-title,
+.headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+*/
+
+
+.form {
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  background: rgb(206, 83, 12);
+  padding: 30px;
+  width: 90%;
+  max-width: 450px;
+  position: relative;
+  padding: 0px;
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+.container {
+  background-color: coral;
+}
+
+  .navbar {
+  color: rgb(255, 145, 0);
+  background-color: #02309c;
+  justify-content: space-between;
+}
+
+span {
+  padding-right: 1rem;
+}
+
+body {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.mat-expansion-panel-header-description {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.mat-expansion-panel {
+  text-align: center;
+  background-color: #fff;
+}
+
+
+.mat-card-title {
+  color: orange;
+  text-align: center;
+}
+.mat-button, .mat-stroked-button {
+  background-color:#0c2152;
+  color: #fff;
+}
+
+.mat-button-toggle-group {
+  background-color: blue;
+  color: blue;
+}
+/*
+.mat-panel-title {
+  justify-content: center !important;
+}
+
+.headers-align .mat-expansion-panel-header-title,
+.headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+*/
+
+
+.form {
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  background: rgb(206, 83, 12);
+  padding: 30px;
+  width: 90%;
+  max-width: 450px;
+  position: relative;
+  padding: 0px;
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+.container {
+  background-color: coral;
+}
+
+}
+*/.navbar {
+  color: rgb(255, 145, 0);
+  background-color: #02309c;
+  justify-content: space-between;
+}
+
+span {
+  padding-right: 1rem;
+}
+
+body {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.mat-expansion-panel-header-description {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.mat-expansion-panel {
+  text-align: center;
+  background-color: #fff;
+}
+
+
+.mat-card-title {
+  color: orange;
+  text-align: center;
+}
+.mat-button, .mat-stroked-button {
+  background-color:#0c2152;
+  color: #fff;
+}
+
+.mat-button-toggle-group {
+  background-color: blue;
+  color: blue;
+}
+/*
+.mat-panel-title {
+  justify-content: center !important;
+}
+
+.headers-align .mat-expansion-panel-header-title,
+.headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+*/
+
+
+.form {
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  background: rgb(206, 83, 12);
+  padding: 30px;
+  width: 90%;
+  max-width: 450px;
+  position: relative;
+  padding: 0px;
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+.container {
+  background-color: coral;
+}
+
+
+
+.form {
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  background: rgb(206, 83, 12);
+  padding: 30px;
+  width: 90%;
+  max-width: 450px;
+  position: relative;
+  padding: 0px;
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+.container {
+  background-color: coral;
+}
+x 10px;
+  border-radius: 10px 10px 10px 10px;
+  background: rgb(206, 83, 12);
+  padding: 30px;
+  width: 90%;
+  max-width: 450px;
+  position: relative;
+  padding: 0px;
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+.container {
+  background-color: coral;
+}
+<a class="action-btn" (click)="onDelete(emp._id,employeeForm)">
+                                        <i class="material-icons">delete</i>
+                                      </a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </body>
+      </mat-expansion-panel>
+
+
+
+        <mat-expansion-panel>
+
+              <form #myForm="ngForm">
+                  <div *ngFor="let certificate of CertificationList">
+                    <div style="border:1px solid blue; text-align:center; padding:10px; margin:5px;">
+                      <mat-form-field>
+                        <input matInput placeholder="Issuer / Authority">
+                      </mat-form-field>
+                      <mat-form-field>
+                        <input matInput placeholder="Certification">
+                      </mat-form-field><br>
+                    </div>
+                  </div>
+              </form>
+              <button mat-stroked-button color="primary" (click)="addNewCertification()"><b> Add New Certification</b></button>&nbsp;&nbsp;<button mat-raised-button color="warn" (click)="removeLastCertification()"><b>Remove Last Certification</b></button>
+          </mat-expansion-panel>
+    </mat-accordion>
+    &nbsp;
+    <br>
+    <div>
+    <span md-colors="{color:'primary'}">
+        <mat-card-title>
+            Welcome to the Calisota App!
+        </mat-card-title><br><br>
+        <mat-card-content>
+        <button mat-raised-button color="primary" style="margin-right:5px;">Submit</button>
+        </mat-card-content>
+      </span>
+</div>
+</body>
+
+-->
